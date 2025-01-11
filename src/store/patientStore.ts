@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 
-export const useBearStore = create<PatientState>((set) => ({
+export const usePatientStore = create<PatientState>((set) => ({
   patients: [],
   setPatients: (patients: Patient[]) => set({ patients })
 }));

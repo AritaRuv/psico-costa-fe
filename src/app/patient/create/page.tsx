@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createPatient } from "@/services/patientService";
 
 export default function CreatePatientPage() {
-  const [formData, setFormData] = useState({ name: "", age: "", email: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", birthDate: undefined, email: "", phoneNumber: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -38,23 +38,37 @@ export default function CreatePatientPage() {
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="firstName"
+            name="firstName"
+            value={formData.firstName}
             onChange={handleChange}
             required
             className="w-full border px-3 py-2 rounded-md"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="age">
-            Edad
+          <label className="block text-sm font-medium mb-1" htmlFor="lastname">
+            Apellido
           </label>
           <input
-            type="number"
-            id="age"
-            name="age"
-            value={formData.age}
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded-md"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="birthDate">
+            Fecha de nacimiento
+          </label>
+          <input
+            type="date"
+            id="birthDate"
+            name="birthDate"
+            value={formData.birthDate}
             onChange={handleChange}
             required
             className="w-full border px-3 py-2 rounded-md"
@@ -69,6 +83,20 @@ export default function CreatePatientPage() {
             id="email"
             name="email"
             value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded-md"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="phoneNumber">
+            Numero de telefono
+          </label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
             required
             className="w-full border px-3 py-2 rounded-md"
