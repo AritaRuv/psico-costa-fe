@@ -1,15 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createPatient } from "@/services/patientService";
+import { useHealthInsuranceStore } from "@/store/health-insuranceStore";
+import { getHealthInsurances } from "@/services/healthInsuranceService";
 
 export default function CreatePatientPage() {
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", birthDate: undefined, email: "", phoneNumber: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", birthDate: undefined, email: "", phoneNumber: "", healthInsurance: undefined});
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const healthInsurances = useHealthInsuranceStore((state) => state.healthInsurances)
+  const setHealthInsurances = useHealthInsuranceStore((state) => state.setHealthInsurances)
+
+  const fetchHealthInsurances = async () => {
+    try {
+      const healthInsurancesData = await getHealthInsurances();
+      setHealthInsurances(healthInsurancesData); // Establecemos los obras sociales en el store
+    } catch (error) {
+      console.error("Error al cargar las obras sociales:", error);
+    }
+  };
+
+    // useEffect para cargar obras sociales solo cuando esté vacío
+    useEffect(() => {
+      if (healthInsurances.length === 0) {
+        fetchHealthInsurances();  // Llamamos a la API para obtener las obras sociales
+      }
+    }, [healthInsurances.length, setHealthInsurances]);
+  
+    // useEffect para reaccionar cuando `healthInsurances` cambia
+    useEffect(() => {
+      if (healthInsurances.length > 0) {
+        console.log("Obras sociales cargadas: ", healthInsurances);
+      }
+    }, [healthInsurances]); // Este useEffect se dispara cuando `healthInsurances` cambia
+  
+  
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -101,6 +131,28 @@ export default function CreatePatientPage() {
             required
             className="w-full border px-3 py-2 rounded-md"
           />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="healthInsurance">
+            Obra social
+          </label>
+          <select
+            id="healthInsurance"
+            name="healthInsurance"
+            value={formData.healthInsurance}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded-md"
+            >
+            <option value="" disabled>
+              Seleccione una obra social
+            </option>
+            {healthInsurances.map((insurance) => (
+              <option key={insurance.id} value={insurance.id}>
+                {insurance.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button
           type="submit"
