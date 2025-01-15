@@ -30,7 +30,7 @@ export default function CreatePatientPage() {
 
   return (
     <div className="p-10">
-      <h1 className="text-2xl font-bold mb-4">Crear Paciente</h1>
+      <h1 className="text-2xl font-bold mb-4">Nuevo Paciente</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="name">
