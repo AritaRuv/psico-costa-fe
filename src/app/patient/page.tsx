@@ -46,6 +46,8 @@ export default function PatientsPage() {
         <td>{patient.phoneNumber}</td>
         <td>{patient.address || "Sin dirección"}</td>
         <td>{new Date(patient.birthDate).toLocaleDateString()}</td>
+        <td>{patient.healthInsurance ? patient.healthInsurance.name : "Particular"}</td>
+
       </tr>
     ));
   };
@@ -69,6 +71,7 @@ export default function PatientsPage() {
               <th>Teléfono</th>
               <th>Direccion</th>
               <th>Fecha de nacimiento</th>
+              <th>Obra social</th>
             </tr>
           </thead>
           <tbody>{patientsTable(patients)}</tbody>
