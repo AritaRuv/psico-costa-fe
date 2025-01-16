@@ -7,6 +7,7 @@ import { useHealthInsuranceStore } from "@/store/health-insuranceStore";
 import { getHealthInsurances } from "@/services/healthInsuranceService";
 
 export default function CreatePatientPage() {
+  
   const [formData, setFormData] = useState({ firstName: "", lastName: "", birthDate: undefined, email: "", phoneNumber: "", healthInsurance: undefined});
   const [loading, setLoading] = useState(false);
   const router = useRouter();

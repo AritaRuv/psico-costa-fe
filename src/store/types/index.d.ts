@@ -13,3 +13,8 @@ type HealthInsuranceState = {
   healthInsurances: HealthInsurance[];
   setHealthInsurances: (healthInsurances: HealthInsurance[]) => void;
 }
+
+type OfficeState = {
+  offices: Office[];
+  setOffices: (offices: Office[]) => void;
+}
