@@ -7,7 +7,7 @@ export const getPatients = async (): Promise<Patient[]> => {
   return response.data;
 };
 
-export const getPatientById = async (id: number): Promise<Patient> => {
+export const getPatientById = async (id: string): Promise<Patient> => {
   const response = await axiosInstance.get(`/patients/${id}`);
   return response.data;
 };
@@ -17,6 +17,6 @@ export const createPatient = async (patient: Partial<Patient>): Promise<Patient>
   return response.data;
 };
 
-export const deletePatient = async (id: number): Promise<void> => {
+export const deletePatient = async (id: string): Promise<void> => {
   await axiosInstance.delete(`/patients/${id}`);
 };

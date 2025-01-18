@@ -45,8 +45,8 @@ export default function ProfessionalsPage() {
         <td>{professional.email ? professional.email : "-"}</td>
         <td>{professional.phoneNumber}</td>
         <td>{professional.specialty}</td>
-        <td>{professional.appointments ? professional.appointments : "-"}</td>
-        <td>{professional.offices ? professional.offices : "-"}</td>
+        {/* <td>{professional.appointments ? professional.appointments : "-"}</td>
+        <td>{professional.offices ? professional.offices : "-"}</td> */}
 
       </tr>
     ));
