@@ -2,6 +2,7 @@
 
 import { getPatients } from "@/services/patientService";
 import { usePatientStore } from "@/store/patientStore";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function PatientsPage() {
@@ -39,16 +40,17 @@ export default function PatientsPage() {
   // Renderiza la tabla de pacientes
   const patientsTable = (patients: Patient[]) => {
     return patients.map((patient) => (
-      <tr key={patient.id}>
-        <td>{patient.firstName}</td>
-        <td>{patient.lastName}</td>
-        <td>{patient.email}</td>
-        <td>{patient.phoneNumber}</td>
-        <td>{patient.address || "Sin dirección"}</td>
-        <td>{new Date(patient.birthDate).toLocaleDateString()}</td>
-        <td>{patient.healthInsurance ? patient.healthInsurance.name : "Particular"}</td>
-
-      </tr>
+      <Link href={`/patient/${patient.id}`} key={patient.id}>
+        <tr key={patient.id}>
+          <td>{patient.firstName}</td>
+          <td>{patient.lastName}</td>
+          <td>{patient.email}</td>
+          <td>{patient.phoneNumber}</td>
+          <td>{patient.address || "Sin dirección"}</td>
+          <td>{new Date(patient.birthDate).toLocaleDateString()}</td>
+          <td>{patient.healthInsurance ? patient.healthInsurance.name : "Particular"}</td>
+        </tr>
+      </Link>
     ));
   };
 
