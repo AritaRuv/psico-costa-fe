@@ -6,7 +6,7 @@ export const getProfessionals = async (): Promise<Professional[]> => {
   return response.data;
 };
 
-export const getProfessionalById = async (id: number): Promise<Professional> => {
+export const getProfessionalById = async (id: string): Promise<Professional> => {
   const response = await axiosInstance.get(`/professionals/${id}`);
   return response.data;
 };
@@ -16,6 +16,6 @@ export const createProfessional = async (professional: Partial<Professional>): P
   return response.data;
 };
 
-export const deleteProfessional = async (id: number): Promise<void> => {
+export const deleteProfessional = async (id: string): Promise<void> => {
   await axiosInstance.delete(`/professionals/${id}`);
 };

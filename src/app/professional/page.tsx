@@ -2,6 +2,7 @@
 
 import { getProfessionals } from "@/services/professionalService";
 import { useProfessionalStore } from "@/store/professionalStore";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ProfessionalsPage() {
@@ -39,16 +40,17 @@ export default function ProfessionalsPage() {
   // Renderiza la tabla de profesionales
   const professionalTable = (professionals: Professional[]) => {
     return professionals.map((professional) => (
-      <tr key={professional.id}>
-        <td>{professional.firstName}</td>
-        <td>{professional.lastName}</td>
-        <td>{professional.email ? professional.email : "-"}</td>
-        <td>{professional.phoneNumber}</td>
-        <td>{professional.specialty}</td>
-        {/* <td>{professional.appointments ? professional.appointments : "-"}</td>
+      <Link href={`/professional/${professional.id}`} key={professional.id}>
+        <tr key={professional.id}>
+          <td>{professional.firstName}</td>
+          <td>{professional.lastName}</td>
+          <td>{professional.email ? professional.email : "-"}</td>
+          <td>{professional.phoneNumber}</td>
+          <td>{professional.specialty}</td>
+          {/* <td>{professional.appointments ? professional.appointments : "-"}</td>
         <td>{professional.offices ? professional.offices : "-"}</td> */}
-
-      </tr>
+        </tr>
+      </Link>      
     ));
   };
 
